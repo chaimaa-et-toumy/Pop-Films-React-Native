@@ -1,16 +1,15 @@
 import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Search from './Search'
-import Home from './Home'
-import Profile from './Profile'
-import Favorite from './Favorite'
+import Search from '../screens/Search'
+import Profile from '../screens/Profile'
+import Favorite from '../screens/Favorite'
+import { SeeAlls } from './NavStack'
 
 const Navbar = () => {
         const Tab = createBottomTabNavigator()
         return (
-            <Tab.Navigator
+            <Tab.Navigator independent={true}
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName;
@@ -41,7 +40,7 @@ const Navbar = () => {
                     }
                 })}
             >
-                <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
+                <Tab.Screen name="Home" component={SeeAlls} options={{ headerShown: false }} />
                 <Tab.Screen name="Search" component={Search} options={{ headerShown: false }} />
                 <Tab.Screen name="Favorite" component={Favorite} options={{ headerShown: false }} />
                 <Tab.Screen name="Profile" component={Profile} options={{ headerShown: false}} />

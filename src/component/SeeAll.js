@@ -2,14 +2,12 @@ import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'rea
 import React, { useState } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
-// import Navbar from '../screens/Navbar'
 import moment from 'moment';
 
-const SeeAll = ({ route }) => {
+const SeeAll = ({ navigation, route }) => {
 
   const [data, setData] = useState(route.params.apiData)
-  console.log(data);
-
+  // console.log(data);
 
   return (
     <>
@@ -26,27 +24,28 @@ const SeeAll = ({ route }) => {
               data.map((item, index) => {
                 // console.log(item);
                 return (
-                  <View style={styles.bgView} key={index}>
-                    <View>
-                      <Image style={styles.img} source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }} />
+                  <TouchableOpacity key={index} onPress={() => { navigation.navigate('Details', { id: item.id, film: item }) }}>
+                    <View style={styles.bgView} >
+                      <View>
+                        <Image style={styles.img} source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }} />
 
-                      <View style={styles.description}>
-                        <Text style={styles.minititle}>{item.title} </Text>
-                        <View style={styles.review}>
-                          <Ionicons name='star' size={15} color='#FFD700' />
-                          <Text style={{ color: '#fff', fontSize: 15 }}>{item.vote_average}</Text>
+                        <View style={styles.description}>
+                          <Text style={styles.minititle}>{item.title} </Text>
+                          <View style={styles.review}>
+                            <Ionicons name='star' size={15} color='#FFD700' />
+                            <Text style={{ color: '#fff', fontSize: 15 }}>{item.vote_average}</Text>
+                          </View>
+                          <Text style={{ color: "#D7CFCF", fontSize: 17 }}><AntDesign name='calendar' size={16} />  {moment(item.release_date).year()}</Text>
                         </View>
-                        <Text style={{ color: "#D7CFCF", fontSize: 17 }}><AntDesign name='calendar' size={16} />  {moment(item.releaseDate).year()}</Text>
                       </View>
                     </View>
-                  </View>
+                  </TouchableOpacity>
                 )
               })
             }
           </ScrollView>
         </View>
       </View>
-      {/* <Navbar /> */}
     </>
 
   )
@@ -76,11 +75,11 @@ const styles = StyleSheet.create({
     marginTop: 19,
   },
   minititle: {
-    color: "#D7CFCF", 
-    fontSize: 16, 
-    marginTop: 5, 
+    color: "#D7CFCF",
+    fontSize: 16,
+    marginTop: 5,
     marginBottom: 5,
-    flexWrap: 'wrap', 
+    flexWrap: 'wrap',
     width: 150
   },
   bgView: {

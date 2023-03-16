@@ -1,5 +1,4 @@
-import Start from './src/screens/Start';
-import NavStack from './src/utils/NavStack';
+import NavStack from './src/navigation/NavStack';
 
 const App = () => {
   return (
